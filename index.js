@@ -12,112 +12,101 @@
 
 // add your functions here
 
-function replaceText(elem, str) {
-  elem.innerText = str;
+function replaceText(elem, str){
+    elem.textContent = str;
 }
 
-function addTextTo(elem, str) {
-  elem.innerText += str;
+function addTextTo(elem, str){
+    elem.textContent += str;
 }
 
-function moreBears() {
-  let bear = document.querySelector("#animals");
-
-  bear.setAttribute("src", "http://placebear.com/400/200");
-  bear.setAttribute("alt", "A bear.");
-  bear.setAttribute("title", "A BEAR!");
+function moreBears(){
+    const img = document.querySelector("#animals");
+    img.src = "http://placebear.com/400/200";
+    img.alt = "A bear.";
+    img.title = "A BEAR!";
 }
 
-function setId(elem, str) {
-  elem.setAttribute("id", str);
-  return elem;
+function setId(elem, str){
+    elem.id = str;
+    return elem;
 }
 
-function setClass(elem, str) {
-  elem.className = str;
-  return elem;
+function setClass(elem, str){
+    elem.classList = str;
+    return elem;
 }
 
-function addAClass(elem, str) {
-  elem.classList.add(str);
-  return elem;
+function addAClass(elem, str){
+    elem.classList.add(str);
+    return elem;
 }
 
-function removeAClass(elem, str) {
-  elem.classList.remove(str);
-  return elem;
+function removeAClass(elem, str){
+    elem.classList.remove(str);
+    return elem;
 }
 
-function newElement(name) {
-  return document.createElement(name);
+function newElement(name){
+    return document.createElement(name); 
 }
 
-function findElementById(id) {
-  return document.querySelector("#" + id);
+function findElementById(id){
+    return document.getElementById(id);
 }
 
-function findElementsByQuery(query) {
-  return document.querySelectorAll(query);
+function findElementsByQuery(query){
+    return document.querySelectorAll(query);
 }
 
-function reverseList(query) {
-  const list = document.querySelector(query);
-
-  const items = list.children;
-
-//   console.log(list);
-
-  for (let i = items.length - 1; i >= 0; i--) {
-    // console.log(items[i]);
-    list.append(items[i]);
-  }
-
-//   console.log(list);
-
-  return list;
+function reverseList(query){
+    const myList = document.querySelector(query);
+    
+    for (let i = myList.children.length; i >= 0; i--){
+        myList.append(myList.children[i]);
+    }
+    
+    return myList;
 }
 
-function mover(moveThis, appendToThis) {
-  const element = document.querySelector(moveThis);
-  const appendTo = document.querySelector(appendToThis);
-  appendTo.append(element);
+function mover(moveThis, appendToThis){
+    const moveMe = document.querySelector(moveThis);
+    const list = document.querySelector(appendToThis);
+
+    list.append(moveMe);
 }
 
 function filler(list, candidates){
-    // const myList = document.querySelector(list);
-    // console.log(candidates);
     candidates.forEach(candidate => {
-        const listItem = document.createElement("li");
-        listItem.textContent = candidate;
-        list.append(listItem);
+        const newElement = document.createElement("li");
+        newElement.textContent = candidate;
+        list.appendChild(newElement);
     });
 }
 
 function dupe(selector){
     const element = document.querySelector(selector);
-
-    const newElement = document.createElement(element.nodeName);
-    newElement.textContent = element.textContent;
-    element.parentElement.appendChild(newElement);
+    element.parentElement.append(element.cloneNode(true));
 }
 
 function removeAll(selector){
-    const element = document.querySelectorAll(selector);
-    element.forEach(indididualElement => {
-      indididualElement.remove()
+    const allElements = document.querySelectorAll(selector);
+    allElements.forEach(element => {
+        element.remove();
     });
 }
 
 function getUserData(){
-  const name = document.querySelector("#username");
-  const speed = document.querySelector("#speed");
-  const student = document.querySelector("#student");
+    const name = document.querySelector("#username");
+    const speed = document.querySelector("#speed");
+    const student = document.querySelector("#student");
 
-  const myObject = {
-    "name": name.value,
-    "speed": parseInt(speed.value),
-    "student": student.checked,
-  };
+    // console.log(name.attributes);
 
-  return myObject;
+    const myObject = {
+        "name": name.value,
+        "speed": parseInt(speed.value),
+        "student": student.checked,
+    }
+    return myObject;
 }
