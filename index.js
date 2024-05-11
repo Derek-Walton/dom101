@@ -103,7 +103,21 @@ function dupe(selector){
 
 function removeAll(selector){
     const element = document.querySelectorAll(selector);
+    element.forEach(indididualElement => {
+      indididualElement.remove()
+    });
+}
 
+function getUserData(){
+  const name = document.querySelector("#username");
+  const speed = document.querySelector("#speed");
+  const student = document.querySelector("#student");
 
+  const myObject = {
+    "name": name.value,
+    "speed": parseInt(speed.value),
+    "student": student.checked,
+  };
 
+  return myObject;
 }
