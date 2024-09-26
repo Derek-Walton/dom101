@@ -12,7 +12,7 @@
 
 // add your functions here
 
-function replaceText(elem, str){
+function replaceText(elem, str) {
     elem.textContent = str;
 }
 
@@ -20,93 +20,95 @@ function addTextTo(elem, str){
     elem.textContent += str;
 }
 
-function moreBears(){
-    const img = document.querySelector("#animals");
-    img.src = "http://placebear.com/400/200";
-    img.alt = "A bear.";
-    img.title = "A BEAR!";
+function moreBears() {
+    const bear = document.querySelector('#animals');
+    bear.src = 'http://placebear.com/400/200';
+    bear.alt = 'A bear.';
+    bear.title = 'A BEAR!';
 }
 
-function setId(elem, str){
+function setId(elem, str) {
     elem.id = str;
     return elem;
 }
 
-function setClass(elem, str){
+function setClass(elem, str) {
     elem.classList = str;
     return elem;
 }
 
-function addAClass(elem, str){
+function addAClass(elem, str) {
     elem.classList.add(str);
     return elem;
 }
 
-function removeAClass(elem, str){
+function removeAClass(elem, str) {
     elem.classList.remove(str);
     return elem;
 }
 
 function newElement(name){
-    return document.createElement(name); 
+    const newElem = document.createElement(name);
+    return newElem;
 }
 
-function findElementById(id){
-    return document.getElementById(id);
+function findElementById(id) {
+    return document.querySelector('#' + id);
 }
 
-function findElementsByQuery(query){
+function findElementsByQuery(query) {
     return document.querySelectorAll(query);
 }
 
 function reverseList(query){
-    const myList = document.querySelector(query);
+    const listElem = document.querySelector(query);
     
-    for (let i = myList.children.length; i >= 0; i--){
-        myList.append(myList.children[i]);
+    const list = listElem.children;
+    
+    for (let index = list.length; index >= 0; index--) {
+        listElem.append(list[index]);
     }
-    
-    return myList;
+    return listElem;
 }
 
-function mover(moveThis, appendToThis){
-    const moveMe = document.querySelector(moveThis);
-    const list = document.querySelector(appendToThis);
+function mover(moveThis, appendToThis) {
+    const movingItem = document.querySelector(moveThis);
+    const appendingThis = document.querySelector(appendToThis);
 
-    list.append(moveMe);
+    appendingThis.append(movingItem);
 }
 
-function filler(list, candidates){
-    candidates.forEach(candidate => {
-        const newElement = document.createElement("li");
-        newElement.textContent = candidate;
-        list.appendChild(newElement);
+function filler(list, candidates) {
+    candidates.forEach(listStr => {
+        const newElement = document.createElement('li');
+        newElement.textContent = listStr;
+        list.append(newElement);
     });
 }
 
-function dupe(selector){
+function dupe(selector) {
     const element = document.querySelector(selector);
-    element.parentElement.append(element.cloneNode(true));
+
+    const newElement = document.createElement(element.nodeName);
+    newElement.textContent = element.textContent;
+    element.parentElement.append(newElement);
 }
 
 function removeAll(selector){
-    const allElements = document.querySelectorAll(selector);
-    allElements.forEach(element => {
-        element.remove();
+    const elementsToRemove = findElementsByQuery(selector);
+    elementsToRemove.forEach(element => {
+        element.parentElement.removeChild(element);
     });
 }
 
 function getUserData(){
-    const name = document.querySelector("#username");
-    const speed = document.querySelector("#speed");
-    const student = document.querySelector("#student");
+    const name = document.querySelector('#username');
+    const speed = document.querySelector('#speed');
+    const student = document.querySelector('#student');
 
-    // console.log(name.attributes);
-
-    const myObject = {
-        "name": name.value,
-        "speed": parseInt(speed.value),
-        "student": student.checked,
+    return {
+        name: name.value,
+        speed: parseInt(speed.value),
+        student: student.checked
     }
-    return myObject;
 }
